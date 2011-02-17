@@ -38,7 +38,7 @@ public class myBlockListener extends BlockListener
 		Block block = event.getBlock();
 
 		//Get the closest player to the sign
-		Player player = plugin.getClosestPlayer(block.getX(), block.getY(), block.getZ());	
+		Player player = event.getPlayer();// plugin.getClosestPlayer(block.getX(), block.getY(), block.getZ());	
 		
 		//Check if player uses a sign
 		if(player!=null && plugin.hasPlayerLinkedAChest(player))

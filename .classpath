@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
-	<classpathentry kind="lib" path="C:/bukkit/iConomy.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/bukkit/bukkit-0.0.1-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="http://javadoc.lukegb.com/Bukkit"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/bukkit/Permissions.jar"/>
+	<classpathentry kind="lib" path="libs/bukkit-0.0.1-SNAPSHOT.jar" sourcepath="bukkit_src"/>
+	<classpathentry kind="lib" path="libs/iConomy.jar"/>
+	<classpathentry kind="lib" path="libs/Permissions.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

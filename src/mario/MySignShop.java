@@ -26,6 +26,9 @@ import org.bukkit.inventory.ItemStack;
 
 import com.nijikokun.bukkit.iConomy.iConomy;
 
+import com.nijikokun.bukkit.Permissions.Permissions;
+import com.nijiko.permissions.PermissionHandler;
+
 /**
  * Plugin: My Sign Shop
  * @author mhalkyer
@@ -41,6 +44,7 @@ public class MySignShop extends JavaPlugin
 	public String version = "";  
 	public boolean debugging = false;	
 	public Timer timer = new Timer();
+	private PermissionHandler permissions;
 	
 	public MySignShop(PluginLoader pluginLoader, Server instance, PluginDescriptionFile desc, File folder, File plugin, ClassLoader cLoader)
 	{
@@ -76,11 +80,20 @@ public class MySignShop extends JavaPlugin
 		logger.log(Level.INFO, name + " version " + version + " is enabled.");
 		
 		// Check for iConomy - disable plugin if not found
-		if(isIconomyInstalled()==false)
+		if(isPluginInstalled("iConomy")==false)
 		{
 			logger.log(Level.INFO, name + " iConomy not detected, shutting down...");
 			pm.disablePlugin(this);
 		}
+		
+		// Check for Permissions - disable plugin if not found
+		if(isPluginInstalled("Permissions")==false)
+		{
+			logger.log(Level.INFO, name + " Permissions not detected, shutting down...");
+			pm.disablePlugin(this);
+		}
+		else
+			SetupPermissions();
 		
 		logger.log(Level.INFO, name + " Done loading.");
 	}
@@ -114,16 +127,21 @@ public class MySignShop extends JavaPlugin
 				logger.log(Level.INFO, name + " /mss command detected from player.");
 			
 			Player player = (Player)sender;
-			players_creatingashop.add(player.getName());
+			
+			if(players_creatingashop.contains(player.getName()))
+				return false;
+			else
+				players_creatingashop.add(player.getName());
+			
 			sender.sendMessage(name + " Place or right-click a chest.");
 			return true;
 		}
 		return false;
 	}
 
-	private boolean isIconomyInstalled()
+	private boolean isPluginInstalled(String name)
 	{
-		Plugin test = this.getServer().getPluginManager().getPlugin("iConomy");
+		Plugin test = this.getServer().getPluginManager().getPlugin(name);
 
         if (test != null)
             return true;
@@ -328,8 +346,16 @@ public class MySignShop extends JavaPlugin
 		return "1";
 	}
 	
+	public void SetupPermissions()
+	{
+		Plugin test = this.getServer().getPluginManager().getPlugin("Permissions");
+        permissions = ((Permissions)test).getHandler();
+	}
 	
-	
+	public boolean hasPermission(Player player, String node)
+	{
+		return permissions.has(player, node);
+	}
 	
 	
 	
