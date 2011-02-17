@@ -1,0 +1,14 @@
+name: MySignShop
+version: 1.0
+main: mario.MySignShop
+website: http://forums.bukkit.org/members/mhalkyer.819/
+author: mhalkyer
+description: >
+             A simple sign shop plugin using iConomy.
+commands:
+  mss:
+    description: Used to set/link signs and chests.
+    usage: |
+           /<command> [player]
+           Example: /<command> - clears your own inventory.
+           Example: /<command> Bukkit - clears Bukkit's inventory.
